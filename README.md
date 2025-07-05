@@ -56,3 +56,50 @@ BUILD SUCCESSFUL in 1s
 The amount of product flavors affects build time by some reason.
 
 ---
+
+### Story 3 (The fix)
+To find the reason of long build we can use next command:\
+`gradle assembleItest1Debug --info`
+
+More about logging in gradle:\
+https://docs.gradle.org/current/userguide/logging.html
+
+When running the command you can notice following outputs on the configuration phase
+```text
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+Detected Android Gradle Plugin compose compiler configuration
+... 247 the same logs
+```
+
+It seems a little bit weird to see these kind of logs during incremental builds
+
+The solution is pretty simple, enable configuration-caching:\
+Add the following line to your `gradle.properties` file and sync the project
+```text
+org.gradle.configuration-cache=true
+```
+
+### Test 5
+Incremental build with no codebase changes. (50 flavors in the project)
+```text
+BUILD SUCCESSFUL in 301ms
+34 actionable tasks: 34 up-to-date
+Configuration cache entry reused.
+```
+
+### Test 6
+Incremental build with 1 line change in MainActivity.kt. (50 flavors in the project)
+```text
+BUILD SUCCESSFUL in 1s
+34 actionable tasks: 4 executed, 30 up-to-date
+Configuration cache entry reused.
+```
+
+As you can notice, no more such logs appear during the configuration phase:
+```text
+Detected Android Gradle Plugin compose compiler configuration
+```
+
+More about configuration caching:\
+https://docs.gradle.org/current/userguide/configuration_cache.html

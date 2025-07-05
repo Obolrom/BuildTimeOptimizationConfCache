@@ -16,7 +16,7 @@ android {
             applicationIdSuffix = ".prod1"
             versionNameSuffix = "-prod1"
         }
-       /* create("itest2") {
+        create("itest2") {
             dimension = "version"
             applicationIdSuffix = ".prod2"
             versionNameSuffix = "-prod2"
@@ -260,7 +260,7 @@ android {
             dimension = "version"
             applicationIdSuffix = ".prod50"
             versionNameSuffix = "-prod50"
-        }*/
+        }
     }
 
     defaultConfig {
