@@ -29,3 +29,30 @@ Incremental build with 1 line change in MainActivity.kt. (50 flavor in the proje
 BUILD SUCCESSFUL in 7s
 34 actionable tasks: 4 executed, 30 up-to-date
 ```
+
+---
+
+### Story 2
+Let's try to leave only 1 product flavor, for example "ITest1".\
+
+Again use the same command to build the project:\
+`gradle assembleItest1Debug`
+
+### Test 3
+Incremental build with no codebase changes. (1 flavor in the project)
+```text
+BUILD SUCCESSFUL in 529ms
+34 actionable tasks: 34 up-to-date
+```
+
+### Test 4
+Incremental build with 1 line change in MainActivity.kt. (1 flavor in the project)
+```text
+BUILD SUCCESSFUL in 1s
+34 actionable tasks: 4 executed, 30 up-to-date
+```
+
+### Conclusion:
+The amount of product flavors affects build time by some reason.
+
+---
